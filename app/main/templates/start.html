@@ -1,0 +1,46 @@
+<ion-view view-title="main module">
+  <ion-content>
+    <div class="list">
+      <div class="item item-divider">
+        Options
+      </div>
+
+      <a class="item item-icon-left" href="#" ng-click="start.generateEntries()">
+        <i class="icon ion-plus-circled"></i>
+        Add more entries
+      </a>
+
+      <a class="item item-icon-left" href="#" ng-click="start.clearEntries()">
+        <i class="icon ion-trash-b"></i>
+        Clear entries
+      </a>
+      <div class="item item-icon-left" href="#">
+        <i class="icon ion-person-stalker"></i>
+        Entries in array
+        <span class="badge badge-assertive">{{start.entries.length}}</span>
+      </div>
+      <li class="item item-checkbox">
+        <label class="checkbox">
+          <input type="checkbox" ng-model="start.checkedAll" ng-click="start.toggleAll()">
+        </label>
+        Toggle all
+      </li>
+      <div class="item item-divider">
+        Entries {{start.entriesView.length}}
+      </div>
+      <li class="item item-checkbox" ng-repeat="entry in start.entriesView track by entry.id">
+        <label class="checkbox">
+          <input type="checkbox" ng-model="entry.checked" name="entry.id">
+        </label>
+        {{entry.id}} - {{entry.name}}
+        <span class="badge badge-light">{{$index}}</span>
+      </li>
+      <ion-infinite-scroll
+      on-infinite="start.loadMore()"
+      ng-if="start.canLoadMore()"
+      immediate-check="false"
+      distance="1%">
+      </ion-infinite-scroll>
+    </div>
+  </ion-content>
+</ion-view>
